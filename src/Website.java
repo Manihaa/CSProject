@@ -1,7 +1,5 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Website {
     private Scanner scan;
@@ -95,6 +93,31 @@ public class Website {
     }
 
     private void login(){
+        User user;
+        String us = "";
+        String pw = "";
+        boolean boo = true;
+
+        while(boo){
+            System.out.print("Username: ");
+            us = scan.nextLine();
+            for (int i = 0; i < Users.size(); i++){
+                if (Users.get(i).getUser().equals(us)){
+                    user = Users.get(i);
+                    boo = false;
+                }
+            }
+            if (boo){
+                System.out.println("Please enter a valid username.\n");
+            }
+        }
+
+        boo = true;
+        while(boo){
+            System.out.print("Password: ");
+            pw = scan.nextLine();
+
+        }
 
     }
 }

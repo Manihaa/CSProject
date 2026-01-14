@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDateTime;
 
 public class Website {
     private Scanner scan;
@@ -18,7 +19,12 @@ public class Website {
         System.out.print("Login (1), Sign up (2)\nEnter: ");
         String answer = scan.nextLine();
         if (answer.equals("1")){
-            login();
+            if (Users.isEmpty()){
+                System.out.println("Please create an account before logging in.\n");
+                welcome();
+            }else{
+                login();
+            }
         }else if (answer.equals("2")){
             signUp();
         }else{
@@ -93,13 +99,13 @@ public class Website {
     }
 
     private void login(){
-        User user;
+        User user = null;
         String us = "";
         String pw = "";
         boolean boo = true;
 
         while(boo){
-            System.out.print("Username: ");
+            System.out.print("\nUsername: ");
             us = scan.nextLine();
             for (int i = 0; i < Users.size(); i++){
                 if (Users.get(i).getUser().equals(us)){
@@ -116,8 +122,14 @@ public class Website {
         while(boo){
             System.out.print("Password: ");
             pw = scan.nextLine();
-
+            if(user.authenticate(pw)){
+                boo = false;
+            }else{
+                System.out.println("Password entered was incorrect. Please try again.");
+            }
         }
+
+        user.logData();
 
     }
 }
